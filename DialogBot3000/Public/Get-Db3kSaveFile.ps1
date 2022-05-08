@@ -1,12 +1,12 @@
-function Get-DB3kFolder {
+function Get-DB3kSaveFile {
     [CmdletBinding()]
     Param([Hashtable]$Properties = @{},
         [Switch]$DialogOnly)
-
-    $dlg = new-object System.Windows.Forms.FolderBrowserDialog
+        
+    $dlg = new-object System.Windows.Forms.SaveFileDialog
     Set-ObjectProperties -object $dlg -Properties $Properties
     if ($DialogOnly) {
         return $dlg
     }
-    Show-DialogForResult $dlg SelectedPath -throw
+    Show-DialogForResult $dlg FileName -throw
 }
