@@ -1,8 +1,12 @@
-function Get-DB3kFile{
+function Get-DB3kFile {
     [CmdletBinding()]
-    Param()
+    Param([Hashtable]$Properties = @{},
+        [Switch]$DialogOnly)
 
-    $dlg=new-object System.Windows.Forms.OpenFileDialog
-    $result=$dlg.ShowDialog()
-    $dlg.FileName
+    $dlg = new-object System.Windows.Forms.OpenFileDialog
+    Set-ObjectProperties -object $dlg -Properties $Properties
+    if ($DialogOnly) {
+        return $dlg
+    }
+    Show-DialogForResult $dlg FileName -throw
 }
